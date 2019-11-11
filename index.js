@@ -2,7 +2,10 @@ new Vue({
   el: '#app',
   data() {
     return {
-      //    msg: 'Hello'
+      msg: 'Hello',
     };
+  },
+  mounted() {
+    this.msg = 'gg';
   },
 });
