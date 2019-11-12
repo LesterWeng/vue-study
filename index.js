@@ -1,11 +1,24 @@
-new Vue({
-  el: '#app',
+// new Vue({
+//   el: '#app',
+//   data() {
+//     return {
+//       msg: 'Hello',
+//     };
+//   },
+//   mounted() {
+//     this.msg = 'gg';
+//   },
+// });
+import MiniVue from "./mini-vue/index.js";
+
+new MiniVue({
+  el: "#app",
   data() {
     return {
-      msg: 'Hello',
+      number: 0
     };
   },
-  mounted() {
-    this.msg = 'gg';
-  },
+  methods: {
+    onClickButton() {}
+  }
 });

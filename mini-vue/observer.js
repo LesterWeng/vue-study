@@ -1,16 +1,21 @@
-class Dep {
+let uid = 1;
+
+export class Dep {
+  // target目的在于将当前watcher全局化，便于访问
   static target = null;
 
   constructor() {
-    this.value = null;
+    this.id = uid++;
     this.subs = [];
+
+    // 使用ids主要出于性能考虑，has性能比indexOf好很多
+    this.subIds = new Set();
   }
 
-  // 由于要维护sub的depIds数据，只能由sub(watcher)主动增删
   addSub(sub) {
-    const index = this.subs.indexOf(sub);
-    if (index === -1) {
+    if (this.subIds.has(sub.id)) {
       this.subs.push(sub);
+      this.subIds.add(sub.id);
     }
   }
 
@@ -22,12 +27,14 @@ class Dep {
   }
 
   depend() {
-    this.addSub(Dep.target);
+    if (Dep.target) {
+      this.addSub(Dep.target);
+    }
   }
 
   notify() {
     for (const sub of this.subs) {
-      sub.update(this.value);
+      sub.update();
     }
   }
 }
@@ -37,17 +44,10 @@ export class Observer {
     this.walk(data);
   }
 
-  walk(data) {
-    for (const key of Object.keys(data)) {
-      const val = data[key];
-      this.defineReactive(data, key, val);
-    }
-  }
-
   defineReactive(data, key, val) {
     const dep = new Dep();
 
-    if (Object.prototype.toString.call(val) === '[object Object]') {
+    if (Object.prototype.toString.call(val) === "[object Object]") {
       observe(val);
     } else {
       Object.defineProperty(data, key, {
@@ -61,10 +61,16 @@ export class Observer {
           if (val === newVal) return;
 
           val = newVal;
-          dep.value = newVal;
           dep.notify();
-        },
+        }
       });
+    }
+  }
+
+  walk(data) {
+    for (const key of Object.keys(data)) {
+      const val = data[key];
+      this.defineReactive(data, key, val);
     }
   }
 }

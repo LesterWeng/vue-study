@@ -4,34 +4,22 @@
 // 数据 => data中的key => 抽象为依赖Dep
 // Dom(异步调度-vDom-render) <= 抽象的观察者Watcher
 
-import { observe } from './observer';
-import { Watcher } from './watcher';
-import { Compiler } from './compiler';
-import { Scheduler } from './scheduler';
+import { observe } from "./observer";
+import { Compiler } from "./compiler";
 
-class MiniVue {
+export default class MiniVue {
   constructor(options) {
-    this._init(options);
+    this.init(options);
   }
 
   // 目前：不支持Array
-  _init(options) {
+  init(options) {
     this.$el = document.querySelector(options.el);
     this.$options = options;
     this.$data = options.data();
 
-    this._defineReactive(this.$data);
+    observe(this.$data);
+
+    new Compiler(this);
   }
 }
-
-new MiniVue({
-  el: '#app',
-  data() {
-    return {
-      number: 0,
-    };
-  },
-  methods: {
-    onClickButton() {},
-  },
-});

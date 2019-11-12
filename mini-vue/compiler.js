@@ -1,3 +1,19 @@
+import { Watcher } from "./watcher";
+
 export class Compiler {
-  _compile() {}
+  constructor(vm) {
+    this.vm = vm;
+    this.$el = vm.$el;
+
+    this.init();
+  }
+
+  init() {
+    new Watcher(this.vm, this.updateComponent, () => {});
+  }
+
+  updateComponent() {
+    // TODO:
+    console.log("updateComponent");
+  }
 }

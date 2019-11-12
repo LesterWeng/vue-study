@@ -1,15 +1,15 @@
 export class Scheduler {
   static queues = [];
 
-  _enqueue(watcher) {
+  static enqueue(watcher) {
     Scheduler.queues.push(watcher);
     Promise.resolve().then(() => {
-      watcher._compile();
-      Scheduler._dequeue(watcher);
+      watcher.run();
+      Scheduler.dequeue(watcher);
     });
   }
 
-  _dequeue(watcher) {
+  static dequeue(watcher) {
     const index = this.queues.indexOf(watcher);
     if (index !== -1) {
       this.queues.splice(index, 1);
