@@ -6,4 +6,4 @@
 - [x] Watcher
 - [ ] Compiler(virtual dom)
 
-[MiniVue](./mini-vue/MiniVue.png)
+![MiniVue](./mini-vue/MiniVue.png)
