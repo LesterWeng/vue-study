@@ -2,6 +2,6 @@
 
 #### 目前 status:
 
-[x] Observer
-[x] Watcher
-[ ] compiler(virtual dom)
+- [x] Observer
+- [x] Watcher
+- [ ] Compiler(virtual dom)
