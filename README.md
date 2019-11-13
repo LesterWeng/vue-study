@@ -4,4 +4,4 @@
 
 - [x] Observer
 - [x] Watcher
-- [ ] compiler(virtual dom)
+- [ ] Compiler(virtual dom)
