@@ -13,7 +13,7 @@ export class Dep {
   }
 
   addSub(sub) {
-    if (this.subIds.has(sub.id)) {
+    if (!this.subIds.has(sub.id)) {
       this.subs.push(sub);
       this.subIds.add(sub.id);
     }

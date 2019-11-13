@@ -50,6 +50,6 @@ export class Watcher {
 
   update() {
     // 微任务队列异步更新ui
-    Scheduler.enqueue();
+    Scheduler.enqueue(this);
   }
 }

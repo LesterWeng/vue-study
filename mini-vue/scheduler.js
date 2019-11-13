@@ -3,7 +3,7 @@ export class Scheduler {
 
   static enqueue(watcher) {
     Scheduler.queues.push(watcher);
-    Promise.resolve().then(() => {
+    setTimeout(() => {
       watcher.run();
       Scheduler.dequeue(watcher);
     });

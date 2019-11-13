@@ -1,0 +1,24 @@
+{
+  "name": "vue-study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LesterWeng/vue-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LesterWeng/vue-study/issues"
+  },
+  "homepage": "https://github.com/LesterWeng/vue-study#readme",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0"
+  }
+}
