@@ -13,6 +13,7 @@ import { extend, mergeOptions, formatComponentName } from '../util/index'
 let uid = 0
 
 export function initMixin (Vue: Class<Component>) {
+  // RECORD:(_init)生成子组件vDom时通过_init初始化
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid

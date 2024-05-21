@@ -186,6 +186,7 @@ export function mountComponent (
       measure(`vue ${name} patch`, startTag, endTag)
     }
   } else {
+    // RECORD:(updateComponent)初始化和更新时调用_update通过patch对比新(旧)vDom生成dom
     updateComponent = () => {
       vm._update(vm._render(), hydrating)
     }
@@ -194,6 +195,7 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
+  // RECORD:render watcher
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {
@@ -212,6 +214,8 @@ export function mountComponent (
   return vm
 }
 
+// RECORD:(updateChildComponent，父组件更新后，内部的子组件vNode均为新建的，
+// 通过此方法同步oldVNode上listeners、attrs、props等，当props改变时子组件才会更新)
 export function updateChildComponent (
   vm: Component,
   propsData: ?Object,
@@ -261,6 +265,8 @@ export function updateChildComponent (
   vm.$listeners = listeners || emptyObject
 
   // update props
+  // RECORD:props改变时，触发initProps进行的响应式更新，所以子组件会更新
+  // 而prop对象内部改变时，引用指向父组件的数据，直接触发子组件render watch
   if (propsData && vm.$options.props) {
     toggleObserving(false)
     const props = vm._props

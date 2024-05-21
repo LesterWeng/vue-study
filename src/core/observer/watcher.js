@@ -42,6 +42,7 @@ export default class Watcher {
   getter: Function;
   value: any;
 
+  // RECORD:(Watcher)
   constructor (
     vm: Component,
     expOrFn: string | Function,
@@ -98,6 +99,7 @@ export default class Watcher {
   /**
    * Evaluate the getter, and re-collect dependencies.
    */
+  // RECORD:(get)new Watcher或setter后触发
   get () {
     pushTarget(this)
     let value

@@ -63,7 +63,6 @@ export class Observer {
    */
   walk(obj: Object) {
     const keys = Object.keys(obj);
-    debugger;
     for (let i = 0; i < keys.length; i++) {
       defineReactive(obj, keys[i]);
     }
@@ -158,6 +157,7 @@ export function defineReactive(
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
+    // RECORD:(getter)，将依赖状态(expOrFn内依赖的data、props)的相关watcher(render、computed、$watch)加入到dep.subs，在后续状态改变时触发其更新
     get: function reactiveGetter() {
       const value = getter ? getter.call(obj) : val;
       if (Dep.target) {

@@ -506,6 +506,7 @@ export function createPatchFunction (backend) {
     index,
     removeOnly
   ) {
+    // QUESTION:什么时候会相等的？
     if (oldVnode === vnode) {
       return
     }

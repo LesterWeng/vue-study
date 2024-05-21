@@ -45,6 +45,7 @@ export function proxy(target: Object, sourceKey: string, key: string) {
   Object.defineProperty(target, key, sharedPropertyDefinition);
 }
 
+// RECORD:(initState)包含了对data(逐层)、props(首层)的响应式处理和computed、$watch的Watcher处理，以及将其代理到this上
 export function initState(vm: Component) {
   vm._watchers = [];
   const opts = vm.$options;
@@ -183,6 +184,7 @@ function initComputed(vm: Component, computed: Object) {
 
     if (!isSSR) {
       // create internal watcher for the computed property.
+      // RECORD:computed watcher
       watchers[key] = new Watcher(
         vm,
         getter || noop,
@@ -361,6 +363,7 @@ export function stateMixin(Vue: Class<Component>) {
     }
     options = options || {};
     options.user = true;
+    // RECORD:$watch watcher
     const watcher = new Watcher(vm, expOrFn, cb, options);
     if (options.immediate) {
       try {
